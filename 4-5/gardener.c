@@ -18,28 +18,33 @@
 
 int flg = 1;
 int sock = 0;
+sem_t *sem;
 void ctrl_c(int dummy) {
     flg = 0;
     close(sock);
+    sem_close(sem);
+
+    sem_unlink("garden-sem");
+    exit(0);
 }
 
 int main(int argc, char *argv[]) {
-    // signal(SIGINT, ctrl_c);
+    signal(SIGINT, ctrl_c);
 
     struct sockaddr_in serv_addr;
 
-    sem_t *sem = sem_open("garden-se10m", O_CREAT, 0666, 1);
+    sem = sem_open("garden-sem", O_CREAT, 0666, 1);
 
     if (sem == SEM_FAILED) {
         endError("FAILED TO ATTACH SEMAPHORE");
     }
 
-    if (argc < 2) {
-        printf("Usage: %s [identifier]", argv[0]);
+    if (argc < 4) {
+        printf("Usage: %s [ip_addr] [port] [identifier]", argv[0]);
         return 1;
     }
 
-    char identifier = argv[1][0];
+    char identifier = argv[3][0];
 
     if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
         printf("\n Socket creation error \n");
@@ -47,9 +52,9 @@ int main(int argc, char *argv[]) {
     }
 
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
+    serv_addr.sin_port = htons(atoi(argv[2]));
 
-    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+    if (inet_pton(AF_INET, argv[1], &serv_addr.sin_addr) <= 0) {
         printf("\nInvalid address/ Address not supported \n");
         return -1;
     }
@@ -92,6 +97,7 @@ int main(int argc, char *argv[]) {
     message *inner_msg = (message *)malloc(sizeof(message));
     int mlen;
     while (flg) {
+        printf("Wainitng\n");
         if ((mlen = recv(sock, msg, sizeof(message), 0)) < 0) {
             close(sock);
             endError("Cant reach server");
@@ -106,31 +112,31 @@ int main(int argc, char *argv[]) {
                 endError("Sem wait failed");
             }
             inner_msg->action = GET_FLOWER_STATUS;
-            //* request info
+
             printf("[Send] {action: %d, flower_id: %d}\n", inner_msg->action, inner_msg->flower_id);
             send(sock, inner_msg, sizeof(message), 0);
             recv(sock, msg, sizeof(message), 0);
             printf("[Rec] {action: %d, flower_id: %d}\n", msg->action, msg->flower_id);
-            //* =====
-            if (msg->action == RET_WATERING) {
+
+            if (msg->action != RET_WITHERING) {
                 if (sem_post(sem) < 0) {
                     endError("Sem psot failed");
                 }
+                inner_msg->action = 0;
                 continue;
             }
-            printf("%d", time(NULL));
             inner_msg->action = WATER_FLOWER;
             inner_msg->flower_id = msg->flower_id;
             printf("[Send] {action: %d, flower_id: %d}\n", inner_msg->action, inner_msg->flower_id);
             send(sock, inner_msg, sizeof(message), 0);
-            usleep(200 * 1000);
             if (sem_post(sem) < 0) {
                 endError("Sem psot failed");
             }
-            usleep(200 * 1000);
+
             inner_msg->action = WATERED_FLOWER;
             printf("[Send] {action: %d, flower_id: %d}\n", inner_msg->action, inner_msg->flower_id);
             send(sock, inner_msg, sizeof(message), 0);
+            sleep(1);
         }
     }
     free(msg);

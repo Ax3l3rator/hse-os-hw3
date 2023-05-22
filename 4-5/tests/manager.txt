@@ -1,0 +1,272 @@
+Server started listening on port 3455
+Waiting for clients to connect....
+Flowerbed connected!
+Waiting for clients to connect....
+Gardener 1 connected!
+Waiting for clients to connect....
+Gardener 2 connected!
+[Flowers] {action: 2, flower_id:23, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:23}
+[Flowers] {action: 6, flower_id:23, dest: 2}
+[Gard2] {action: 1, flower_id:23}
+[Gard1] {action: 4, flower_id:23}
+[Gard2] {action: 3, flower_id:23}
+[Flowers] {action: 7, flower_id:23, dest: 1}
+[Flowers] {action: 2, flower_id:6, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:6}
+[Flowers] {action: 6, flower_id:6, dest: 2}
+[Gard2] {action: 1, flower_id:6}
+[Gard1] {action: 4, flower_id:6}
+[Gard2] {action: 3, flower_id:6}
+[Flowers] {action: 7, flower_id:6, dest: 1}
+[Flowers] {action: 2, flower_id:17, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:17}
+[Flowers] {action: 6, flower_id:17, dest: 2}
+[Gard2] {action: 1, flower_id:17}
+[Gard1] {action: 4, flower_id:17}
+[Gard2] {action: 3, flower_id:17}
+[Flowers] {action: 7, flower_id:17, dest: 1}
+[Flowers] {action: 2, flower_id:35, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:35}
+[Flowers] {action: 6, flower_id:35, dest: 2}
+[Gard2] {action: 1, flower_id:35}
+[Gard1] {action: 4, flower_id:35}
+[Gard2] {action: 3, flower_id:35}
+[Flowers] {action: 7, flower_id:35, dest: 1}
+[Flowers] {action: 2, flower_id:33, dest: 0}
+Sent to both gardeners
+[Gard1] {action: 4, flower_id:33}
+[Flowers] {action: 6, flower_id:33, dest: 1}
+[Gard1] {action: 1, flower_id:33}
+[Gard2] {action: 4, flower_id:33}
+[Gard1] {action: 3, flower_id:33}
+[Flowers] {action: 7, flower_id:33, dest: 2}
+[Flowers] {action: 2, flower_id:15, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:15}
+[Flowers] {action: 6, flower_id:15, dest: 2}
+[Gard2] {action: 1, flower_id:15}
+[Gard1] {action: 4, flower_id:15}
+[Gard2] {action: 3, flower_id:15}
+[Flowers] {action: 7, flower_id:15, dest: 1}
+[Flowers] {action: 2, flower_id:26, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:26}
+[Flowers] {action: 6, flower_id:26, dest: 2}
+[Gard2] {action: 1, flower_id:26}
+[Gard1] {action: 4, flower_id:26}
+[Flowers] {action: 7, flower_id:26, dest: 1}
+[Gard2] {action: 3, flower_id:26}
+[Flowers] {action: 2, flower_id:12, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:12}
+[Flowers] {action: 6, flower_id:12, dest: 2}
+[Gard2] {action: 1, flower_id:12}
+[Gard1] {action: 4, flower_id:12}
+[Gard2] {action: 3, flower_id:12}
+[Flowers] {action: 7, flower_id:12, dest: 1}
+[Flowers] {action: 2, flower_id:9, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:9}
+[Flowers] {action: 6, flower_id:9, dest: 2}
+[Gard2] {action: 1, flower_id:9}
+[Gard1] {action: 4, flower_id:9}
+[Gard2] {action: 3, flower_id:9}
+[Flowers] {action: 7, flower_id:9, dest: 1}
+[Flowers] {action: 2, flower_id:21, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:21}
+[Flowers] {action: 6, flower_id:21, dest: 2}
+[Gard2] {action: 1, flower_id:21}
+[Gard1] {action: 4, flower_id:21}
+[Gard2] {action: 3, flower_id:21}
+[Flowers] {action: 7, flower_id:21, dest: 1}
+[Flowers] {action: 2, flower_id:2, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:2}
+[Flowers] {action: 6, flower_id:2, dest: 2}
+[Gard2] {action: 1, flower_id:2}
+[Gard1] {action: 4, flower_id:2}
+[Gard2] {action: 3, flower_id:2}
+[Flowers] {action: 7, flower_id:2, dest: 1}
+[Flowers] {action: 2, flower_id:27, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:27}
+[Flowers] {action: 6, flower_id:27, dest: 2}
+[Gard2] {action: 1, flower_id:27}
+[Gard1] {action: 4, flower_id:27}
+[Gard2] {action: 3, flower_id:27}
+[Flowers] {action: 7, flower_id:27, dest: 1}
+[Flowers] {action: 2, flower_id:10, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:10}
+[Flowers] {action: 6, flower_id:10, dest: 2}
+[Gard2] {action: 1, flower_id:10}
+[Gard1] {action: 4, flower_id:10}
+[Gard2] {action: 3, flower_id:10}
+[Flowers] {action: 7, flower_id:10, dest: 1}
+[Flowers] {action: 2, flower_id:19, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:19}
+[Flowers] {action: 6, flower_id:19, dest: 2}
+[Gard2] {action: 1, flower_id:19}
+[Gard1] {action: 4, flower_id:19}
+[Gard2] {action: 3, flower_id:19}
+[Flowers] {action: 7, flower_id:19, dest: 1}
+[Flowers] {action: 2, flower_id:3, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:3}
+[Flowers] {action: 6, flower_id:3, dest: 2}
+[Gard2] {action: 1, flower_id:3}
+[Gard1] {action: 4, flower_id:3}
+[Gard2] {action: 3, flower_id:3}
+[Flowers] {action: 7, flower_id:3, dest: 1}
+[Flowers] {action: 2, flower_id:6, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:6}
+[Flowers] {action: 6, flower_id:6, dest: 2}
+[Gard2] {action: 1, flower_id:6}
+[Gard1] {action: 4, flower_id:6}
+[Gard2] {action: 3, flower_id:6}
+[Flowers] {action: 7, flower_id:6, dest: 1}
+[Flowers] {action: 2, flower_id:20, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:20}
+[Flowers] {action: 6, flower_id:20, dest: 2}
+[Gard2] {action: 1, flower_id:20}
+[Gard1] {action: 4, flower_id:20}
+[Gard2] {action: 3, flower_id:20}
+[Flowers] {action: 7, flower_id:20, dest: 1}
+[Flowers] {action: 2, flower_id:26, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:26}
+[Flowers] {action: 6, flower_id:26, dest: 2}
+[Gard2] {action: 1, flower_id:26}
+[Gard1] {action: 4, flower_id:26}
+[Gard2] {action: 3, flower_id:26}
+[Flowers] {action: 7, flower_id:26, dest: 1}
+[Flowers] {action: 2, flower_id:12, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:12}
+[Flowers] {action: 6, flower_id:12, dest: 2}
+[Gard2] {action: 1, flower_id:12}
+[Gard1] {action: 4, flower_id:12}
+[Flowers] {action: 7, flower_id:12, dest: 1}
+[Gard2] {action: 3, flower_id:12}
+[Flowers] {action: 2, flower_id:16, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:16}
+[Flowers] {action: 6, flower_id:16, dest: 2}
+[Gard2] {action: 1, flower_id:16}
+[Gard1] {action: 4, flower_id:16}
+[Gard2] {action: 3, flower_id:16}
+[Flowers] {action: 7, flower_id:16, dest: 1}
+[Flowers] {action: 2, flower_id:11, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:11}
+[Flowers] {action: 6, flower_id:11, dest: 2}
+[Gard2] {action: 1, flower_id:11}
+[Gard1] {action: 4, flower_id:11}
+[Gard2] {action: 3, flower_id:11}
+[Flowers] {action: 7, flower_id:11, dest: 1}
+[Flowers] {action: 2, flower_id:8, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:8}
+[Flowers] {action: 6, flower_id:8, dest: 2}
+[Gard2] {action: 1, flower_id:8}
+[Gard1] {action: 4, flower_id:8}
+[Gard2] {action: 3, flower_id:8}
+[Flowers] {action: 7, flower_id:8, dest: 1}
+[Flowers] {action: 2, flower_id:7, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:7}
+[Flowers] {action: 6, flower_id:7, dest: 2}
+[Gard2] {action: 1, flower_id:7}
+[Gard1] {action: 4, flower_id:7}
+[Gard2] {action: 3, flower_id:7}
+[Flowers] {action: 7, flower_id:7, dest: 1}
+[Flowers] {action: 2, flower_id:29, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:29}
+[Flowers] {action: 6, flower_id:29, dest: 2}
+[Gard2] {action: 1, flower_id:29}
+[Gard1] {action: 4, flower_id:29}
+[Gard2] {action: 3, flower_id:29}
+[Flowers] {action: 7, flower_id:29, dest: 1}
+[Flowers] {action: 2, flower_id:22, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:22}
+[Flowers] {action: 6, flower_id:22, dest: 2}
+[Gard2] {action: 1, flower_id:22}
+[Gard1] {action: 4, flower_id:22}
+[Gard2] {action: 3, flower_id:22}
+[Flowers] {action: 7, flower_id:22, dest: 1}
+[Flowers] {action: 2, flower_id:10, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:10}
+[Flowers] {action: 6, flower_id:10, dest: 2}
+[Gard2] {action: 1, flower_id:10}
+[Gard1] {action: 4, flower_id:10}
+[Gard2] {action: 3, flower_id:10}
+[Flowers] {action: 7, flower_id:10, dest: 1}
+[Flowers] {action: 2, flower_id:22, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:22}
+[Flowers] {action: 6, flower_id:22, dest: 2}
+[Gard2] {action: 1, flower_id:22}
+[Gard1] {action: 4, flower_id:22}
+[Gard2] {action: 3, flower_id:22}
+[Flowers] {action: 7, flower_id:22, dest: 1}
+[Flowers] {action: 2, flower_id:3, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:3}
+[Flowers] {action: 6, flower_id:3, dest: 2}
+[Gard2] {action: 1, flower_id:3}
+[Gard1] {action: 4, flower_id:3}
+[Gard2] {action: 3, flower_id:3}
+[Flowers] {action: 7, flower_id:3, dest: 1}
+[Flowers] {action: 2, flower_id:27, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:27}
+[Flowers] {action: 6, flower_id:27, dest: 2}
+[Gard2] {action: 1, flower_id:27}
+[Gard1] {action: 4, flower_id:27}
+[Gard2] {action: 3, flower_id:27}
+[Flowers] {action: 7, flower_id:27, dest: 1}
+[Flowers] {action: 2, flower_id:15, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:15}
+[Flowers] {action: 6, flower_id:15, dest: 2}
+[Gard2] {action: 1, flower_id:15}
+[Gard1] {action: 4, flower_id:15}
+[Gard2] {action: 3, flower_id:15}
+[Flowers] {action: 7, flower_id:15, dest: 1}
+[Flowers] {action: 2, flower_id:9, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:9}
+[Flowers] {action: 6, flower_id:9, dest: 2}
+[Gard2] {action: 1, flower_id:9}
+[Gard1] {action: 4, flower_id:9}
+[Gard2] {action: 3, flower_id:9}
+[Flowers] {action: 7, flower_id:9, dest: 1}
+[Flowers] {action: 2, flower_id:2, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:2}
+[Flowers] {action: 6, flower_id:2, dest: 2}
+[Gard2] {action: 1, flower_id:2}
+[Gard1] {action: 4, flower_id:2}
+[Gard2] {action: 3, flower_id:2}
+[Flowers] {action: 7, flower_id:2, dest: 1}
+[Flowers] {action: 2, flower_id:22, dest: 0}
+Sent to both gardeners
+[Gard2] {action: 4, flower_id:22}
+[Flowers] {action: 6, flower_id:22, dest: 2}
+[Gard2] {action: 1, flower_id:22}
+[Gard1] {action: 4, flower_id:22}
+[Gard2] {action: 3, flower_id:22}
+[Flowers] {action: 7, flower_id:22, dest: 1}
+All child processes terminated.

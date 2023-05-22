@@ -14,7 +14,6 @@
 
 #include "../essentials.h"
 
-#define PORT 12345
 #define MAX_CLIENTS 10
 
 int pid;
@@ -49,7 +48,7 @@ void end(int dummy) {
     exit(0);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     parent = getpid();
     int server_socket;
     char buffer[1024] = {0};
@@ -58,6 +57,11 @@ int main() {
     int flowerbed_socket = 0;
     signal(SIGINT, end);
     signal(SIGUSR1, end);
+    if (argc < 2) {
+        printf("Usage: %s [server_port]", argv[0]);
+        exit(1);
+    }
+    const int PORT = atoi(argv[1]);
     server_socket = TCPCreateSocket(PORT);
 
     printf("Server started listening on port %d\n", PORT);
@@ -122,6 +126,7 @@ int main() {
         } else if (pide == 0) {
             while (1) {
                 message *msg = (message *)malloc(sizeof(message));
+                memset(msg, 0, sizeof(message));
                 int len = recv(flow_sock, msg, sizeof(message), 0);
                 if (len < 0) {
                     endError("ds");
@@ -130,13 +135,26 @@ int main() {
                     break;
                 }
                 if (msg->action != 0) {
-                    printf("[Flowers] {action: %d, flower_id:%d}\n", msg->action, msg->flower_id);
-                    send(gard1_sock, msg, sizeof(message), 0);
-                    send(gard2_sock, msg, sizeof(message), 0);
-                    memset(msg, 0, sizeof(message));
-                }
+                    // printf("%ln", (long int *)msg);
+                    printf("[Flowers] {action: %d, flower_id:%d, dest: %d}\n", msg->action,
+                           msg->flower_id, msg->dest);
+                    if (msg->dest == 1) {
+                        send(gard1_sock, msg, sizeof(message), 0);
+                    } else if (msg->dest == 2) {
+                        send(gard2_sock, msg, sizeof(message), 0);
+                    } else if (msg->action == 2) {
+                        msg->dest = 0;
+                        int pud = fork();
+                        if (pud == 0) {
+                            send(gard1_sock, msg, sizeof(message), 0);
+                            exit(0);
+                        } else {
+                            send(gard2_sock, msg, sizeof(message), 0);
+                        }
 
-                sleep(1);
+                        printf("Sent to both gardeners\n");
+                    }
+                }
             }
         } else {
             while (1) {
@@ -148,9 +166,9 @@ int main() {
                 if (len == 0) {
                     break;
                 }
+                msg->dest = 1;
                 printf("[Gard1] {action: %d, flower_id:%d}\n", msg->action, msg->flower_id);
                 send(flow_sock, msg, sizeof(message), 0);
-                sleep(1);
             }
         }
     } else {
@@ -165,15 +183,16 @@ int main() {
                 if (len == 0) {
                     break;
                 }
+                msg->dest = 2;
                 printf("[Gard2] {action: %d, flower_id:%d}\n", msg->action, msg->flower_id);
                 send(flow_sock, msg, sizeof(message), 0);
-                sleep(1);
             }
 
         } else {
-            send(gard1_sock, "+", 1, 0);
-            send(gard2_sock, "+", 1, 0);
-            send(flow_sock, "+", 1, 0);
+            char msg[1] = {'+'};
+            send(gard1_sock, msg, 1, 0);
+            send(gard2_sock, msg, 1, 0);
+            send(flow_sock, msg, 1, 0);
             while (1) {
                 pid = wait(NULL);
                 if (pid == -1) {
@@ -183,92 +202,6 @@ int main() {
             }
         }
     }
-
-    // if ((handshake_msg_len = recv(client_socket, handshake_message, 2, 0)) < 0) {
-    //     endError("Handshake error");
-    // }
-    // if (handshake_message[0] == 'G') {
-    //     printf("Handling gardener %c", handshake_message[1]);
-    //     mode = handshake_message[1] - 48;
-    //     shared->gardeners_sockets[handshake_message[1] - 49] = client_socket;
-    // } else if (handshake_message[0] == 'F') {
-    //     printf("Handling flowerbed");
-    //     shared->flower_socket = client_socket;
-    //     mode = 3;
-    // } else {
-    //     endError("Wrong handshake");
-    // }
-    // printf(" with mode %d\n", mode);
-
-    //     send(client_socket, &mode, sizeof(mode), 0);
-    // printf("Handling client %s with socket %d \n", inet_ntoa(client_addr.sin_addr),
-    // client_socket);
-    // while (1) {
-    //     // client_socket = TCPAccept(server_socket);
-
-    //     int received_size;
-    //     message *msg = (message *)malloc(sizeof(message));
-    //     // printf("%d\n", client_socket);
-
-    //     if ((pid = fork()) < 0) {
-    //         endError("fork() failed");
-    //     } else if (pid == 0) {
-    //         close(server_socket);
-
-    //         // while (shared->flower_socket == 0 || shared->gardeners_sockets[0] == 0 ||
-    //         //        shared->gardeners_sockets[1] == 0) {
-    //         //     sleep(1);
-    //         // }
-    //         // printf("%d %d %d \n", shared->flower_socket, shared->gardeners_sockets[0],
-    //         //        shared->gardeners_sockets[1]);
-    //         // while (1) {
-    //         //     if ((received_size = recv(client_socket, msg, sizeof(message), 0)) < 0) {
-    //         //         endError("recv() failed");
-    //         //     }
-    //         //     if (received_size == 0) {
-    //         //         break;
-    //         //     }
-    //         //     if (msg->action != 0) {
-    //         //         printf("Message in mode %d(socket %d) = {action: %d, flower_id:%d}\n",
-    //         mode,
-    //         //                client_socket, msg->action, msg->flower_id);
-    //         //     }
-    //         //     if (mode == 3) {
-    //         //         printf("%d %d\n", client_socket, shared->flower_socket);
-    //         //         int pid;
-    //         //         if ((pid = fork()) < 0) {
-    //         //             endError("failed to fork");
-    //         //         } else if (pid == 0) {
-    //         //             send(shared->gardeners_sockets[0], msg, sizeof(message), 0);
-    //         //             exit(0);
-
-    //         //         } else {
-    //         //             send(shared->gardeners_sockets[1], msg, sizeof(message), 0);
-    //         //         }
-
-    //         //     } else if (mode == 2 || mode == 1) {
-    //         //         printf("Flower_sock %d\n", shared->flower_socket);
-
-    //         //         if (send(shared->flower_socket, msg, sizeof(message), 0) == -1) {
-    //         //             endError("s");
-    //         //         };
-
-    //         //         printf("Sent to flowers {action: %d, flower_id:%d}", msg->action,
-    //         //                msg->flower_id);
-    //         //     }
-    //         //     // memset(msg, 0, sizeof(message));
-    //         // }
-
-    //         // printf("Leaving connection by %d in mode %d\n", client_socket, mode);
-    //         // if (mode != 0) {
-    //         //     kill(0, SIGUSR1);
-    //         // }
-    //         // free(msg);
-
-    //         exit(0);
-    //     }
-    //     printf("with child process: %d\n", (int)pid);
-    // }
 
     close(gard1_sock);
     close(gard2_sock);
