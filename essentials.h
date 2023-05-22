@@ -40,10 +40,12 @@
 typedef struct msg_struct {
     short action;
     short flower_id;
+    short dest;
 } message;
 
 typedef struct servmem {
     int to;
+    message msg;
 } server_memory;
 
 void endError(char *message) {
