@@ -1,21 +1,50 @@
 #include <arpa/inet.h>
+#include <fcntl.h>
+#include <netinet/in.h>
+#include <semaphore.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/ipc.h>
+#include <sys/mman.h>
 #include <sys/socket.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #define MAXCONNECTIONS 13
 
-#define HEALTHY 0
-#define WITHERING 1
-#define WATERED 2
+#define STATUS_HEALTHY 0
+#define STATUS_WITHERING 1
+#define STATUS_WATERING 2
+
+#define END_CONVERSATION 0
+#define WATER_FLOWER 1
+#define WITHER_FLOWER 2
+#define WATERED_FLOWER 3
+#define GET_FLOWER_STATUS 4
+
+#define RET_HEALTHY 5
+#define RET_WITHERING 6
+#define RET_WATERING 7
+
+#define GARDENER1_MODE 1
+#define GARDENER2_MODE 2
+#define FLOWERBED_MODE 3
+
+#define D_G1 1
+#define D_G2 2
+#define D_F 3
 
 typedef struct msg_struct {
-    int flower_statuses[40];
-    int id;
-    int author_id;
+    short action;
+    short flower_id;
 } message;
+
+typedef struct servmem {
+    int to;
+} server_memory;
 
 void endError(char *message) {
     perror(message);
@@ -30,7 +59,7 @@ int TCPAccept(int server_socket) {
         endError("failed accept client");
     }
 
-    printf("Handling client %s\n", inet_ntoa(client_addr.sin_addr));
+    printf("Handling client %s with socket %d \n", inet_ntoa(client_addr.sin_addr), client_socket);
 
     return client_socket;
 }
@@ -46,7 +75,7 @@ int TCPCreateSocket(unsigned short port) {
     memset(&server_addr, 0, sizeof(server_addr));
 
     server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_addr.sin_addr.s_addr = INADDR_ANY;
     server_addr.sin_port = htons(port);
 
     if (bind(server_socket, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
@@ -58,22 +87,4 @@ int TCPCreateSocket(unsigned short port) {
     }
 
     return server_socket;
-}
-
-void TCPHandle(int client_socket) {
-    char msg[1024] = {0};
-    int recieved_size;
-
-    while (1) {
-        if ((recieved_size = recv(client_socket, msg, 1024, 0)) < 0) {
-            endError("recv() failed");
-        }
-        if (recieved_size == 0) {
-            break;
-        }
-        printf("Response: %s\n", msg);
-        memset(msg, 0, 1024);
-    }
-    printf("Leaving connection\n");
-    close(client_socket);
 }

@@ -12,8 +12,11 @@
 int main(int argc, char *argv[]) {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char input[1024] = {0};
-    char buffer[1024] = {0};
+
+    int flowers[40];
+    for (int i = 0; i < 40; ++i) {
+        flowers[i] = 0;
+    }
 
     if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
         printf("\n Socket creation error \n");
@@ -32,28 +35,69 @@ int main(int argc, char *argv[]) {
         printf("\nConnection Failed \n");
         return -1;
     }
-    char handshake_message[2] = {'G', '0'};
+
+    char handshake_message[2] = {'F', '0'};
     send(sock, handshake_message, 2, 0);
-    if (recv(sock, handshake_message, 1, 0) <= 0) {
+    int mode = 0;
+    if (recv(sock, &mode, sizeof(mode), 0) < 0) {
         endError("Err during handshake");
     }
-    printf("Handshake happened");
+    printf("Handshake happened\n");
 
+    if (mode != FLOWERBED_MODE) {
+        endError("WRONG MODE");
+    }
+    char a[1] = {'-'};
+    if (recv(sock, a, 1, 0) < 0) {
+        endError("failed to recv");
+    }
+
+    if (a[0] != '+') {
+        printf("No start\n");
+        close(sock);
+        exit(0);
+    }
+
+    message *msg = (message *)malloc(sizeof(message));
+    message *inner_msg = (message *)malloc(sizeof(message));
+    int amount = 1;
     while (1) {
-        // printf("Enter message to send (type 'quit' to exit): ");
+        if (amount) {
+            int id = rand() % 40;
+            if (flowers[id] != STATUS_WITHERING) {
+                flowers[id] = STATUS_WITHERING;
+                inner_msg->action = WITHER_FLOWER;
+                inner_msg->flower_id = id;
+                printf("Sending withering flower %d\n", id);
+                send(sock, inner_msg, sizeof(inner_msg), 0);
+                printf("Sent: {action: %d, flower_id: %d}\n", inner_msg->action,
+                       inner_msg->flower_id);
+            }
+            amount = 0;
+        }
 
-        input[strlen(input) - 1] = '\0';
-        if (strcmp(input, "quit") == 0) {
+        int mlen;
+        printf("Waiting\n");
+        if ((mlen = recv(sock, msg, sizeof(message), 0)) < 0) {
+            endError("oopse");
+        }
+        if (mlen == 0) {
             break;
         }
-
-        if (send(sock, input, strlen(input), 0) <= 0) {
-            printf("Server unreachable\n");
-            close(sock);
-            exit(0);
+        printf("Received:{action: %d, flower_id: %d} \n", msg->action, msg->flower_id);
+        if (msg->action != 0) {
+            printf("Received:{action: %d, flower_id: %d} \n", msg->action, msg->flower_id);
+            if (msg->action == GET_FLOWER_STATUS) {
+                inner_msg->action = flowers[msg->flower_id] + 5;
+                inner_msg->flower_id = msg->flower_id;
+                send(sock, inner_msg, sizeof(message), 0);
+            } else if (msg->action == WATER_FLOWER) {
+                flowers[msg->flower_id] = STATUS_WATERING;
+            } else if (msg->action == WATERED_FLOWER) {
+                flowers[msg->flower_id] = STATUS_HEALTHY;
+                amount = 1;
+            }
         }
-
-        printf("Message sent\n");
     }
 
     close(sock);
